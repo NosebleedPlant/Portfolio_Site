@@ -1,8 +1,16 @@
 .footer {
+  width: 60%;
   padding: 40px 0;
-  flex-grow: 0;
-  opacity: .5;
+  // flex-grow: 0;
+  // opacity: .5;
   align-self: center;
+  color: #555259;
+  background-color: #1c181f;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0px !important;
+  margin: 0px !important;
+  position: relative;
 
 
   &__inner {
@@ -10,8 +18,10 @@
     align-items: center;
     justify-content: space-between;
     margin: 0;
-    width: 760px;
+    width: 100%;
     max-width: 100%;
+    padding-bottom: 20px;
+
 
     @media ($tablet) {
       flex-direction: column;
@@ -20,6 +30,7 @@
 
   a {
     color: inherit;
+    
   }
 
   .copyright {
@@ -30,17 +41,38 @@
     font-size: 1rem;
     justify-content: center;
 
+
     &--user {
       margin: auto;
       text-align: center;
     }
 
     & > *:first-child:not(:only-child) {
-      margin-right: 10px;
+      // margin-right: 10px;
     }
 
     span {
       white-space: nowrap;
     }
   }
+}
+
+.contact-container
+{
+  width: 100%;
+  display: flex;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  
+}
+.email-resume-container
+{
+  flex: 1;
+}
+.links-container
+{
+  padding-top: 20px;
+  flex: 1;
+  text-align: right;
 }
