@@ -1,0 +1,17 @@
+@import "font";
+
+.logo {
+  display: flex;
+  align-items: center;
+  // text-decoration: none;
+  background: $accent;
+  color: white;
+
+  text-align: center;
+  font-size: 2.6rem;
+  width: 100%;
+  font-family:'Inter';
+  font-weight: bold;
+  padding: 0%;
+  margin: 0px;
+}

@@ -1,0 +1,174 @@
+@import "variables";
+
+@import "font";
+@import "buttons";
+@import "form";
+
+@import "header";
+@import "menu";
+@import "logo";
+@import "main";
+@import "post";
+@import "pagination";
+@import "footer";
+
+@import "prism";
+@import "syntax";
+@import "code";
+@import "terms";
+@import "gist";
+
+.previewContainers
+{
+    width: 100%;
+    outline: 20px solid $accent;
+    position: relative;
+    
+        
+}
+.list-item-outline
+{
+    outline: 5px solid $accent;
+    padding: 20px;
+    margin-top: 50px;
+    // background-image: url("/img/articlebg.png");
+    background-size: cover;
+    // background-position: 200px;
+}
+.previewLeft
+{
+    display: inline-block;
+    width: 35%; /* or any other value depending on the space you want between the divs */
+    vertical-align: top; /* to align the top of both divs */
+    padding: 10px;
+
+}
+.previewRight
+{
+    display: inline-block;
+    width: 64%; /* or any other value depending on the space you want between the divs */
+    vertical-align: top; /* to align the top of both divs */
+    margin-top: 0px;
+    padding-left: 30px;
+    padding-top: 3px;
+}
+.previewRight-alt
+{
+    display: inline-block;
+    width: 100%; /* or any other value depending on the space you want between the divs */
+    vertical-align: top; /* to align the top of both divs */
+    margin-top: 0px;
+    padding: 10px;
+}
+// .hero-bg
+// {position: relative;
+// }
+.hero
+{
+    width: 100%;
+    //border: 5px;
+    
+    
+    //background: linear-gradient(250,250,250, 0.5), rgba(250,250,250, 0.5), url("/img/heroBG.png");
+    background-image: url("/img/heroImage.png");
+    //background-color: (0,0,0,0.1);
+    // background-color: rgba(0,0,0,0.1);
+    background-size: cover;
+    padding: 20px;
+    outline: 5px solid $accent;
+    position: relative;
+    //isolation: isolate;
+    //opacity: 0.5;
+}
+// .hero::after
+// {
+//     content: '';
+//     position: absolute;
+//     z-index: -1;
+//     inset: 0;
+//     background: black;
+//     opacity: 0.7;
+// }
+
+.youtube-embed
+{
+    padding: 
+    px;
+    outline: 5px solid $accent;
+    outline-color: $accent;
+    border: 100px;
+    border-color: $accent;
+}
+
+.tools-title
+{
+    display: inline;
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: $accent;
+    
+}
+.tools-content
+{
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+}
+.bot-container
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.post-tags
+{
+    display: inline-block;
+    width: 84%; /* or any other value depending on the space you want between the divs */
+    vertical-align: bottom; /* to align the top of both divs */
+    padding-top: 10px;
+    margin-bottom: 0px;
+    padding-left: 5px;
+    
+}
+.tags {
+// display: block;
+//margin-bottom: 20px;
+font-size: 1.2rem;
+opacity: .6;
+vertical-align: bottom;
+margin-bottom: 0px;
+
+    padding-bottom: 0px;
+
+    a {
+        text-decoration: none;
+        border-bottom: 3px dotted;
+    }
+
+}
+
+.read-more
+{
+    position: relative;
+    // display: inline-block;
+    // width: 15%; /* or any other value depending on the space you want between the divs */
+    vertical-align: top; /* to align the top of both divs */
+    margin-top: 0px;
+    // padding-left: 30px;
+    // padding-top: 3px;
+    background-color: $accent;
+    float: right;
+      border-radius: 4px;
+      // float: right;
+      // display: inline-flex;
+      justify-content: right;
+      margin-left: auto;
+    //   margin-right: 5px;
+    //   margin: 10px;
+      padding: 10px;
+    
+}
+.read-more:hover
+{
+  outline: 2px solid white;
+}
