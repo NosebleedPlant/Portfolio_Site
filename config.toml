@@ -1,7 +1,19 @@
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = '0.90.0'
+[params]
+  themeColor="yellow"
+  showMenuItems = 5
+  centerTheme = true
+  favicon = "/img/favicon.png"
+
+
+
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = 'terminal'
+title = 'Portfolio'
+
 
 [[menu.main]]
 name = "All Projects"
