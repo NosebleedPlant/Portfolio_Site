@@ -20,20 +20,20 @@ name = "All Projects"
 url = "/"
 weight = 1
 
-[[menu.main]]
-name = "Game Dev"
-url = "/projects/gamedev/"
-weight = 2
+# [[menu.main]]
+# name = "Game Dev"
+# url = "/projects/gamedev/"
+# weight = 2
 
-[[menu.main]]
-name = "Technical Art"
-url = "/projects/techart/"
-weight = 3
+# [[menu.main]]
+# name = "Technical Art"
+# url = "/projects/techart/"
+# weight = 3
 
-[[menu.main]]
-name = "UX/HCI"
-url = "/projects/uxhci/"
-weight = 4
+# [[menu.main]]
+# name = "UX/HCI"
+# url = "/projects/uxhci/"
+# weight = 4
 
 [[menu.main]]
 name = "Blog"
