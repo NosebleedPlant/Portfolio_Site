@@ -20,7 +20,7 @@ Space and Bodies was a collection of art works that I made from Sep-Dec 2022. Th
 
 {{< video src="https://user-images.githubusercontent.com/42461443/210529297-732b5697-3539-4547-a032-cc7917f59056.mp4" _width="100" _allign="center">}}
 
-# Role
+# Stuff I did/learned
 ---
 In this project I focused largely on improving my understanding of shaders and real time post processing by writing a variety of effects that mimicked both analogue and digital image distortions. I also learned about customizing Unity’s Universal Render Pipeline through scriptable render features allowing me to create effects that I would not have been able to otherwise.
 
@@ -38,6 +38,42 @@ This fractal explorere originally was made in unity BRP as part of a interactive
 The rendering of the fractal and errant objects is handled through a single compute shader (FractalShader). Orignally the project also served as an excuse to familiarize myself with compute shaders and raymarching. The shader has exposed, lighting color and fractal parameters allowing the look of the scene to be adjusted from the inspector. A custom render feature was written in RayMarcher.cs to actually render the output of the FractalShader to screen. By shifting to URP I could now also specify the injection point at which the ouput of the FractalShader is sent to the camera. This means I could also URP's post processing stack by specifying and injection point that was before the post processing is done, which let me get some nice bloom and depth of feild effects.
 
 The fundamental structure of the FractalShader is based on the raytracing implementation discussed by three-eyed games [[1](http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/)]. The code for the ray marcher is based on this tutorial by Jamie Wong [[2](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/#the-raymarching-algorithm)] and distance estimator used to render the fractal was Mikael Christensen [[3](http://blog.hvidtfeldts.net/index.php/2011/09/distance-estimated-3d-fractals-v-the-mandelbulb-different-de-approximations/)] on their blog. The smooth min function used for blending shapes in the scene was from Inigo Quilez [[4](https://www.iquilezles.org/www/articles/smin/smin.htm)]. Inspiration for this project came from this video [[5](https://youtu.be/Cp5WWtMoeKg)] by Sebastian Lague
+
+The actual compute shader for doing the raymarcher is fairly straightforward:
+
+```C
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // Create our marching ray
+    uint width, height;
+    Result.GetDimensions(width, height);
+    float2 uv = float2((id.xy + float2(0.5f, 0.5f)) / float2(width, height) * 2.0f - 1.0f);
+    Ray ray = CreateCameraRay(uv);
+    
+    // Get gradient color for the background
+    float4 result = lerp(_BGColorA, _BGColorB, uv.y);
+    
+    // This function is where the meat is, handles calculating the shortest distance.
+    float2 distRes = shortestDistanceToSurface(ray);
+    if (distRes.x > maxDst - epsilon)
+    {
+        //no hit
+        float bloom = distRes.y / 5000;
+        Result[id.xy] = lerp(result, float4(_BloomColor, 1) * bloom, distRes.y / 90);
+        return;
+    }
+    
+    // if there was a hit then we get the color using the phong illumination model. I decided to go with this
+    // because it was pretty easy to implement.
+    float3 hitpoint = ray.origin + distRes.x * ray.direction;
+    float3 phongColor = phongIllumination(_DiffuseColor, _AmbientColor,
+                                          _SpecColor, _Shininess,
+                                          hitpoint, ray.origin);
+
+    // then all we have to do is just save that color and were done!
+    Result[id.xy] = float4(phongColor, 1);
+}
+```
 
 #### Preview:
 
@@ -83,33 +119,31 @@ The scene uses a similar approach to scene 01. Two cameras using two sepreate re
 
 ## References and Resources
 ---
-[GPU Ray Tracing in Unity – Part 1](http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/)
+1. [GPU Ray Tracing in Unity – Part 1](http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/)
 
-[Ray Marching and Signed Distance Functions](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/#the-raymarching-algorithm)
+2. [Ray Marching and Signed Distance Functions](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/#the-raymarching-algorithm)
 
-[Distance Estimated 3D Fractals (V): The Mandelbulb &amp; Different DE Approximations](http://blog.hvidtfeldts.net/index.php/2011/09/distance-estimated-3d-fractals-v-the-mandelbulb-different-de-approximations/)
+3. [Distance Estimated 3D Fractals (V): The Mandelbulb &amp; Different DE Approximations](http://blog.hvidtfeldts.net/index.php/2011/09/distance-estimated-3d-fractals-v-the-mandelbulb-different-de-approximations/)
 
-[smooth minimum](https://www.iquilezles.org/www/articles/smin/smin.htm)
+4. [smooth minimum](https://www.iquilezles.org/www/articles/smin/smin.htm)
 
-[Coding Adventure: Ray Marching](https://youtu.be/Cp5WWtMoeKg)
+5. [Coding Adventure: Ray Marching](https://youtu.be/Cp5WWtMoeKg)
 
-[Cyanilux&#39;s URP_BlitRenderFeature](https://github.com/Cyanilux/URP_BlitRenderFeature)
+6. [Cyanilux&#39;s URP_BlitRenderFeature](https://github.com/Cyanilux/URP_BlitRenderFeature)
 
-[VHS and CRT monitor effect](https://godotshaders.com/shader/vhs-and-crt-monitor-effect/)
+7. [VHS and CRT monitor effect](https://godotshaders.com/shader/vhs-and-crt-monitor-effect/)
 
-[How to Simulate Smoke with Shaders](https://www.alanzucconi.com/2016/03/09/simulate-smoke-with-shaders/)
+8. [How to Simulate Smoke with Shaders](https://www.alanzucconi.com/2016/03/09/simulate-smoke-with-shaders/)
 
-[Sorb&#39;s effect breakdown](https://twitter.com/SoerbGames/status/1570773880444448773?s=20&t=ifWw_myvdOQhEnu-xWt3eQ)
+9. [Sorb&#39;s effect breakdown](https://twitter.com/SoerbGames/status/1570773880444448773?s=20&t=ifWw_myvdOQhEnu-xWt3eQ)
 
 ##### Unity RP resources
 
-[Intro Renderer Feature in Unity URP - Desaturate Post Process Effect](https://www.youtube.com/watch?v=MLl4yzaYMBY&t=1s&ab_channel=NedMakesGames)
+10. [Intro Renderer Feature in Unity URP - Desaturate Post Process Effect](https://www.youtube.com/watch?v=MLl4yzaYMBY&t=1s&ab_channel=NedMakesGames)
 
-[Example: How to create a custom rendering effect using the Render Objects Renderer Feature](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@12.1/manual/renderer-features/how-to-custom-effect-render-objects.html)
+11. [Example: How to create a custom rendering effect using the Render Objects Renderer Feature](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@12.1/manual/renderer-features/how-to-custom-effect-render-objects.html)
 
-[How to create a custom Renderer Feature](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@12.1/manual/containers/create-custom-renderer-feature-1.html)
-
-messing with cyan's blit is a great way to learn
+12. [How to create a custom Renderer Feature](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@12.1/manual/containers/create-custom-renderer-feature-1.html) messing with cyan's blit is a great way to learn about unity's rendering pipeline
 
 ##### The awesome audio:
 
