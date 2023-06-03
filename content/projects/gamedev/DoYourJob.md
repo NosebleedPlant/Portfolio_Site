@@ -31,7 +31,7 @@ Initally this was supposed to be a game jam project for Itch.io's bi-weekly Mini
 
 # Stuff I learned:
 ---
-This project let me dive into unity's UI system and I was able to learn quite a few things thanks to that. The approach to developing UI that I landed on was creating a bunch of tiny, self contained scripts such as the ClickToBounce script below. These tiny scripts can them be combined to compose more interesting UI elements. 
+This project let me dive into unity's UI system and I was able to learn quite a few things thanks to that. The approach to adding juice to the UI that I landed on was creating a bunch of tiny, self contained scripts such as the ClickToBounce script below. These tiny scripts can them be combined to compose more interesting UI elements. 
 
 ```C#
 public class ClickToBounce : MonoBehaviour
@@ -46,50 +46,26 @@ public class ClickToBounce : MonoBehaviour
     }
 }
 ```
-The other major thing I was able to wrap my head around was incorporating first-class functions into my code. I had been aware about this functionality of C# for a while but I had never really used it before. Over the course of this project I learned how C# delegates,events and actions work as well as when they might be useful.These can be pretty powerful especially when functionality similar to an observer pattern is need but one of the neat things that it also lets clean up my code a bit. For example the following function takes in an action as a parameter and can checks to see if certain conditions are met. In this case that would be the location of an input event. If those conditions are satisfied then the function calls the action with the appropriate parameter. This avoids the need to call these checks then pass the results back and forth before I call the actual functions resulting in much cleaner code in my opinion
+The other major thing I was able to wrap my head around was incorporating first-class functions into my code. I had been aware about this functionality of C# for a while but I had never really used it before. Over the course of this project I learned how C# delegates,events and actions work as well as when they might be useful.These can be pretty powerful especially when functionality similar to an observer pattern is need but one of the neat things that it also lets me do is clean up my code a bit.
 
-```C#
-private void GameInputRecived(Action<Vector3> func)
-{
-    // read the mouse position and clear cached results from previous event
-    _mouseEventData.position = Mouse.current.position.ReadValue();
-    _click_results.Clear();
-
-    // if the current event has occured within the bounds of a minigame window then call the handler action
-    _uiRaycaster.Raycast(_mouseEventData, _click_results);
-    if(_click_results.Count>0)
-    {
-        if (_click_results[0].gameObject.CompareTag("MinigameWindow"))
-        {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(_mouseEventData.position);
-            func(worldPosition);
-        }
-    }
-}
-```
 Im also fairly happy with how the post processing effect turned out for the fake monitor aesthetic as well as the abbertion that occurs on mistakes. I will likely revist it at some point since I feel theres alot more i can do to imporve it but for now I think it looks good. The effect itself was written using unity's shader graph and involves warping the screen texture using the UVs then applying a few noise masks to get the scan lines effect.
 
 Lastly, another intersting thing I was able to dive deep on was coroutines. I had used them before in Java but in this project I was able to learn how they work in unity. Almost all the games have a timed component to them so I was able to use these to solve a variety of problems such as spawning prefabs over a period of time, calling functions after a delay etc. An example of this is the function that spwans alerts when the network gauge is maxed out: 
 
 ```C#
-private bool _networkAlerted = false;
-private void SpawnNetworkAlert()
-{
-    if(_gameData.NetworkGameData.MaxReached && _networkAlerted==false)
+private IEnumerator SpawnRoutine()
     {
-        _networkAlerted = true;
-        Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-257,257),
-                                            UnityEngine.Random.Range(-190,190),
-                                            0.137251f);
-        Transform popup = Instantiate(NetworkAlertPrefab,MiniGameArea);
-        popup.localPosition = spawnPosition;
-        spawnPosition = new Vector3(spawnPosition.x,spawnPosition.y,spawnPosition.z);
+        while(enabled)
+        {
+            if(gameData.StorageGameData.FileCount<gameData.StorageGameData.MaxFileCount)
+            {
+                Spawn();
+                gameData.StorageGameData.FileCount++;
+            }
+            
+            yield return new WaitForSeconds(gameData.StorageGameData.CurrentSpawnDelay);
+        }
     }
-    else if(_networkAlerted && !_gameData.NetworkGameData.MaxReached)
-    {
-        _networkAlerted = false;
-    }
-}
 ```
 
 # Technical Reflection:

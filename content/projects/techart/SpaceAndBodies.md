@@ -2,7 +2,7 @@
 title: "[Re:]Space-And-Bodies"
 date: 2023-02-25
 draft: false
-tags: ["GameDev", "Rendering", "Shaders", "GenerativeArt"]
+tags: ["GameDev", "Rendering", "Shaders"]
 video_url: "https://www.youtube.com/embed/Zeiy1CrSgFA"
 tools_used: ["Unity", "C#"]
 cover: "/img/articlebg.png"
@@ -27,7 +27,7 @@ In this project I focused largely on improving my understanding of shaders and r
 # Fractal Demo Scene
 ---
 
-This fractal explorere originally was made in unity BRP as part of a interactive art work for the 4k touch table at the DSC in the University of Alberta. The work, titled "I contain Multitudes", supported multi touch controls and a video of it in action is available in the gallery scene. For [Re:] I re-implemented the code in unity's Universal Render Pipeline.
+This fractal explorerer was originally made in unity BRP as part of a interactive art work for the 4k touch table at the DSC in the University of Alberta. The work, titled "I contain Multitudes", supported multi touch controls and a video of it in action is available below. For [Re:] I re-implemented the code in unity's Universal Render Pipeline.
 
 #### File/Folder Structure:
 
@@ -37,11 +37,58 @@ This fractal explorere originally was made in unity BRP as part of a interactive
 
 The rendering of the fractal and errant objects is handled through a single compute shader (FractalShader). Orignally the project also served as an excuse to familiarize myself with compute shaders and raymarching. The shader has exposed, lighting color and fractal parameters allowing the look of the scene to be adjusted from the inspector. A custom render feature was written in RayMarcher.cs to actually render the output of the FractalShader to screen. By shifting to URP I could now also specify the injection point at which the ouput of the FractalShader is sent to the camera. This means I could also URP's post processing stack by specifying and injection point that was before the post processing is done, which let me get some nice bloom and depth of feild effects.
 
-The fundamental structure of the FractalShader is based on the raytracing implementation discussed by three-eyed games [[1](http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/)]. The code for the ray marcher is based on this tutorial by Jamie Wong [[2](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/#the-raymarching-algorithm)] and distance estimator used to render the fractal was Mikael Christensen [[3](http://blog.hvidtfeldts.net/index.php/2011/09/distance-estimated-3d-fractals-v-the-mandelbulb-different-de-approximations/)] on their blog. The smooth min function used for blending shapes in the scene was from Inigo Quilez [[4](https://www.iquilezles.org/www/articles/smin/smin.htm)]. Inspiration for this project came from this video [[5](https://youtu.be/Cp5WWtMoeKg)] by Sebastian Lague
+The fundamental structure of the FractalShader is based on the raytracing implementation discussed by three-eyed games [[1](http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/)]. The code for the ray marcher is based on this tutorial by Jamie Wong [[2](https://jamie-wong.com/2016/07/15/ray-marching-signed-distance-functions/#the-raymarching-algorithm)] and distance estimator used to render the fractal was Mikael Christensen [[3](http://blog.hvidtfeldts.net/index.php/2011/09/distance-estimated-3d-fractals-v-the-mandelbulb-different-de-approximations/)] on their blog that I modified slightly the additional rings around the mandelbulb. The smooth min function used for blending shapes in the scene was from Inigo Quilez [[4](https://www.iquilezles.org/www/articles/smin/smin.htm)]. Inspiration for this project came from this video [[5](https://youtu.be/Cp5WWtMoeKg)] by Sebastian Lague
 
-The actual compute shader for doing the raymarcher is fairly straightforward:
+The actual compute shader for doing the raymarcher is fairly straightforward and the core part of it can be seen below.
 
 ```C
+//----Alot of code has been ommitted for brevity----
+
+//SCENE DISTANCE ESTIMATOR: combines the sdfs for the spheres, cubes and fractal
+float SceneDist(float3 samplePoint)
+{
+    float blendStrength = 0.32;
+    float minimum = maxDst;
+    for (int i = 0; i < _ObjectCount; i++)
+    {
+        if (i % 2 == 0)
+        {
+            minimum = Blend(sphereSDF(samplePoint, _ObjectPositions[i]), minimum, blendStrength);
+            continue;
+        }
+        minimum = Blend(CubeSDF(samplePoint, _ObjectPositions[i]), minimum, blendStrength);
+    }
+    minimum = Blend(mandelBulbDE(samplePoint), minimum, blendStrength);
+    return minimum;
+}
+
+//DISTANCE CALCULATION FUNCTION: handles the marching of the ray.
+float2 shortestDistanceToSurface(Ray ray)
+{
+    float depth = minDst;
+    float iter = 0;
+    for (int i = 0; i < maxStepCount; i++)
+    {
+        float dist = SceneDist(ray.origin + depth * ray.direction);
+        if (dist < epsilon)
+        {
+            return float2(depth, iter);
+        }
+        depth += dist;
+        if (depth > maxDst)
+        {
+            return float2(maxDst, iter);
+        }
+        iter++;
+
+    }
+    return float2(maxDst, iter);
+}
+
+/////////////////////////////////////////////////
+//  MAIN                                       //
+/////////////////////////////////////////////////
+[numthreads(8,8,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
     // Create our marching ray
@@ -53,7 +100,8 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     // Get gradient color for the background
     float4 result = lerp(_BGColorA, _BGColorB, uv.y);
     
-    // This function is where the meat is, handles calculating the shortest distance.
+    // This function is where the meat is, handles calculating the shortest distance. by marching
+    // the ray and checking the scene sdf
     float2 distRes = shortestDistanceToSurface(ray);
     if (distRes.x > maxDst - epsilon)
     {
@@ -82,7 +130,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 # Shader Demo Scene
 ---
 
-Alot of these shaders were developed initally during exprementation for a video art peice titled "I'm figuring it out". In [Re;] I refined the the shaders and explored ways to improve their effectiveness by utalizing custom render features. A very high-level discussion on each effect is avilable under the file/folder structure section. In the project I both utalized the BLIT_ render features that I wrote as well as Cyanilux's Blit feature [[6](https://github.com/Cyanilux/URP_BlitRenderFeature)]. The reason for this is, during development I wanted to be able to apply multiple materials at the same enjection point or manipulate certain properties which is not supported by Cyan's blit. Where custom funcationality was not needed I opted to simply use Cyan's blit.
+Alot of these shaders were developed initally during exprementation for a video art peice titled "I'm figuring it out". In [Re;] I refined the the shaders and explored ways to improve their effectiveness by utalizing custom render features. A very high-level discussion on each effect is avilable under the file/folder structure section. In the project I both utalized the BLIT_ render features that I wrote as well as Cyanilux's Blit feature [[6](https://github.com/Cyanilux/URP_BlitRenderFeature)]. The reason for this is, during development I wanted to be able to apply multiple shader passes at the same enjection point or manipulate certain properties which is not supported by Cyan's blit. Where custom funcationality was not needed I opted to simply use Cyan's blit.
 
 All the scenes utalize the BLIT_background feature along with materials in the MT_Enviorment folder to apply a texture to the screen before opaqes are rendered. I mention this here to avoid repeating it in the other sections. Variations of these material use shaders that either distort the base texture to create interesting patterns or apply masks for layering different textures.
 
