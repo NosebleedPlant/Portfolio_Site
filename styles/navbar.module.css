@@ -1,0 +1,18 @@
+.navbar{
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.navbar ul{
+    margin-block: 3rem;
+    list-style: none;
+}
+
+.navbar li{
+    writing-mode: vertical-rl;
+    padding:2rem;
+    padding-inline-start: 2.6rem;
+    font-size: var(--fs-h6);
+    font-weight: 700;
+    transform: rotate(180deg);
+}

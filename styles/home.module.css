@@ -1,0 +1,13 @@
+.page{
+  max-width: 94rem;
+  display: flex;
+  background-color: var(--primary);
+  height: 100%;
+  padding-inline: 0.5rem;
+}
+
+.content{
+  margin-inline: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 0.7rem;
+}

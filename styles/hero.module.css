@@ -1,0 +1,15 @@
+.superhero{
+    display: flex;
+}
+
+.hero{
+    margin-top: 5.6rem;
+    margin-bottom: 10rem;
+    z-index: 1;
+}
+
+.hero h6{
+    margin-block: 2rem;
+    font-weight: 400;
+    max-width: 60%;
+}

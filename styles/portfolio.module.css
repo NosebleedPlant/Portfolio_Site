@@ -1,0 +1,81 @@
+.portfolio{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 
+    repeat(auto-fit,minmax(min(15rem,100%),38rem));
+    justify-content: center;
+}
+
+.card{
+    background-color: var(--secondary);
+    padding: 20px;
+    color: var(--primary);    
+}
+
+.content{
+    padding: 1rem;
+}
+
+.content h4{
+    font-weight: 800;
+}
+
+.description{
+    min-height: 8rem;
+    line-height: 1.5rem;
+}
+
+.button{
+    background-color: var(--primary);
+    color: var(--secondary);
+    padding: 0.6rem;
+    margin-top: 2rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.button:hover{
+    background-color: var(--tertiary);
+}
+
+.thumbnail{
+    overflow: hidden;
+    border-top: 5px solid var(--primary);
+    border-bottom: 5px solid var(--primary);
+    position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.video-responsive {
+    overflow: hidden;
+    border-top: 5px solid var(--primary);
+    border-bottom: 5px solid var(--primary);
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+  
+.video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+

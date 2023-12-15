@@ -1,0 +1,568 @@
+/**
+ * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/chriskempson/tomorrow-theme
+ * @author Rose Pritchard
+ */
+
+ code[class*="language-"],
+ pre[class*="language-"] {
+     color: #ccc;
+     background: none;
+     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+     font-size: 1em;
+     text-align: left;
+     white-space: pre;
+     word-spacing: normal;
+     word-break: normal;
+     word-wrap: normal;
+     line-height: 1.5;
+ 
+     -moz-tab-size: 4;
+     -o-tab-size: 4;
+     tab-size: 4;
+ 
+     -webkit-hyphens: none;
+     -moz-hyphens: none;
+     -ms-hyphens: none;
+     hyphens: none;
+ 
+ }
+ 
+ /* Code blocks */
+ pre[class*="language-"] {
+     padding: 1em;
+     margin: .5em 0;
+     overflow: auto;
+ }
+ 
+ :not(pre) > code[class*="language-"],
+ pre[class*="language-"] {
+     background: #2d2d2d;
+ }
+ 
+ /* Inline code */
+ :not(pre) > code[class*="language-"] {
+     padding: .1em;
+     border-radius: .3em;
+     white-space: normal;
+ }
+ 
+ .token.comment,
+ .token.block-comment,
+ .token.prolog,
+ .token.doctype,
+ .token.cdata {
+     color: #999;
+ }
+ 
+ .token.punctuation {
+     color: #ccc;
+ }
+ 
+ .token.tag,
+ .token.attr-name,
+ .token.namespace,
+ .token.deleted {
+     color: #e2777a;
+ }
+ 
+ .token.function-name {
+     color: #6196cc;
+ }
+ 
+ .token.boolean,
+ .token.number,
+ .token.function {
+     color: #f08d49;
+ }
+ 
+ .token.property,
+ .token.class-name,
+ .token.constant,
+ .token.symbol {
+     color: #f8c555;
+ }
+ 
+ .token.selector,
+ .token.important,
+ .token.atrule,
+ .token.keyword,
+ .token.builtin {
+     color: #cc99cd;
+ }
+ 
+ .token.string,
+ .token.char,
+ .token.attr-value,
+ .token.regex,
+ .token.variable {
+     color: #7ec699;
+ }
+ 
+ .token.operator,
+ .token.entity,
+ .token.url {
+     color: #67cdcc;
+ }
+ 
+ .token.important,
+ .token.bold {
+     font-weight: bold;
+ }
+ .token.italic {
+     font-style: italic;
+ }
+ 
+ .token.entity {
+     cursor: help;
+ }
+ 
+ .token.inserted {
+     color: green;
+ }
+
+
+
+ /* ////////////////////// */
+
+/*
+ * Default theme，适用于 core/mweb-base.scss。
+ * 取值参考 chrome 默认样式：
+ * https://chromium.googlesource.com/chromium/blink/+/refs/heads/main/Source/core/css/html.css
+ * 所有 import "core/mweb-base.scss" 的文件都应该同时导入此变量文件。
+ */
+/* color */
+/* font & line */
+/* boxing */
+/* elememts */
+/* color */
+/* prism & pre */
+/* font */
+/* header */
+/* spacing */
+/* table */
+/*
+ * 基准样式，相当于 reset.css，使主题在不同平台下有统一的表现。
+ * 各个属性的默认值为 chrome 的默认样式，见 variables/default.scss。
+ */
+.post {
+  --text-color: #1f2329;
+  --bg-color: white;
+  --side-bar-bg-color: white;
+  --active-file-bg-color: white;
+  --window-border: 0 solid white;
+  --control-text-color: #1f2329;
+  --primary-color: #3370ff;
+  --primary-btn-border-color: #3370ff;
+  --active-file-border-color: #3370ff;
+  --primary-btn-text-color: #3370ff;
+  --item-hover-text-color: #3370ff;
+  --meta-content-color: #3370ff;
+  --search-select-text-color: #3370ff;
+  --heading-char-color: #3370ff;
+  /* Mermaid diagrams*/
+  --mermaid-theme: default;
+
+    display: block; 
+  line-height: 1.68;
+  -webkit-text-size-adjust: 100%;
+  max-width: 860px;
+  margin: 0px auto;
+  padding: 1.6rem 3.2rem;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Arial,
+    Segoe UI, PingFang SC, Microsoft Yahei, Hiragino Sans GB, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 16px;
+  color: #1f2329;
+
+  background-color: wheat;
+}
+.post * {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.post > *:first-child {
+  margin-top: 0 !important;
+}
+.post > *:last-child {
+  margin-top: 0 !important;
+}
+.post p,
+.post details,
+.post dl,
+.post ol,
+.post ul,
+.post xmp,
+.post plaintext,
+.post listing,
+.post blockquote,
+.post table,
+.post figure,
+.post hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.post h1 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 26px;
+  margin-bottom: 10px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post h6 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.post p {
+  margin-left: 0;
+  margin-right: 0;
+}
+.post pre,
+.post xmp,
+.post plaintext,
+.post listing {
+  font-family: var(--monospace);
+}
+.post blockquote > :first-child {
+  margin-top: 0;
+}
+.post blockquote > :last-child {
+  margin-bottom: 0;
+}
+.post hr {
+  border-style: inset;
+  border-width: 1px;
+}
+.post img {
+  max-width: 100%;
+  height: auto;
+}
+.post li {
+  word-wrap: break-all;
+}
+.post li + li {
+  margin-top: 4px;
+}
+.post ul ul,
+.post ol ul,
+.post ul ol,
+.post ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.post .task-list-item {
+  list-style-type: none;
+}
+.post a {
+  color: #3370ff;
+  text-decoration: underline;
+}
+.post a img {
+  border: none;
+}
+.post b,
+.post strong {
+  font-weight: bold;
+}
+.post i,
+.post cite,
+.post em,
+.post var,
+.post address,
+.post dfn {
+  font-style: italic;
+}
+.post code,
+.post kbd,
+.post tt,
+.post samp {
+  font-family: var(--monospace);
+}
+.post mark {
+  color: #1f2329;
+  padding: 0.2em 0;
+  background-color: rgba(255, 246, 122, 0.8);
+}
+.post del,
+.post s {
+  color: inherit;
+}
+.post table {
+  color: black;
+  border-collapse: collapse;
+  background-color: white;
+  border-spacing: 2px;
+  font-size: 1em;
+  width: 100%;
+  text-align: center;
+}
+.post th,
+.post td {
+  border-color: #dee0e3;
+  border-width: 1px;
+  border-style: solid;
+}
+.post th {
+  padding: 8px 8px;
+  font-size: 1em;
+  font-weight: 500;
+}
+.post td {
+  padding: 8px 8px;
+  font-size: 1em;
+  font-weight: normal;
+}
+.post .md-math-block,
+.post .md-rawblock {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.post .md-rawblock > .md-rawblock-tooltip {
+  background-color: #f5f6f7;
+  transition: 0.5s;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+}
+.post .md-rawblock:hover > .md-rawblock-tooltip {
+  transition: 0.5s;
+  visibility: visible;
+  opacity: 1;
+  animation: none;
+}
+.post .md-rawblock-control:not(.md-rawblock-tooltip) {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.post * {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.post h1,
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
+  line-height: 1.4;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0.37em;
+}
+.post blockquote {
+  display: block;
+  margin-left: 0;
+  padding-left: 14px;
+  border-left: 2px solid #3370ff;
+  color: rgba(31, 35, 41, 0.7);
+}
+.post code {
+  border-radius: 4px;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: #f5f6f7;
+  word-spacing: normal;
+  line-height: 1.6;
+  padding: 0 2px;
+}
+
+.post pre.md-fences,
+.post pre.md-meta-block {
+  border: 1px solid #dee0e3;
+  background-color: #f5f6f7;
+  border-radius: 3px;
+  padding: 10px;
+}
+.post a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  hyphens: auto;
+  word-break: break-word;
+  text-decoration: none;
+}
+.post a:hover {
+  text-decoration: underline;
+}
+.post hr {
+  margin: 13px 0 12px;
+  border: 0px;
+  height: 1px;
+  background-origin: content-box;
+  background-image: linear-gradient(90deg, #bbbfc4, #bbbfc4);
+  background-repeat: no-repeat;
+}
+.post ul {
+  margin-left: 0;
+  /* padding-left: 22px; */
+  padding-left: 0;
+  list-style: none;
+}
+.post ul > li:not([class*="task-list-item"]) {
+  word-wrap: break-all;
+  position: relative;
+  padding-left: 22px;
+}
+.post ul > li:not([class*="task-list-item"]):before {
+  position: absolute;
+  /* position: relative; */
+  top: 2px;
+  content: "•";
+  color: #3370ff;
+  display: inline-block;
+  margin-left: -20px;
+  margin-right: 20px;
+  width: 0px;
+  font-size: 0.8em;
+  transform: scale(1.25);
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+.post ul
+  > li:not([class*="task-list-item"])
+  li:not([class*="task-list-item"])::before {
+  content: "◦";
+  transform: scale(1);
+  font-weight: 700;
+}
+.post ul
+  > li:not([class*="task-list-item"])
+  li:not([class*="task-list-item"])
+  li:not([class*="task-list-item"])::before {
+  content: "▪";
+  transform: scale(1.25);
+  font-weight: normal;
+}
+.post ol {
+  counter-reset: ol_counter;
+  margin-left: 0;
+  padding-left: 22px;
+  list-style: none;
+}
+.post ol > li:not([class*="task-list-item"]) {
+  word-wrap: break-all;
+  padding-left: 0px;
+  position: relative;
+}
+.post ol > li:not([class*="task-list-item"]):before {
+  content: counter(ol_counter) ".";
+  counter-increment: ol_counter;
+  color: #3370ff;
+  position: absolute;
+  margin-left: -22px;
+  margin-right: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: visible;
+  min-width: 18px;
+  border-radius: 2px;
+  transform: translateX(-2px);
+  font-family: Helvetica Neue, Consolas;
+}
+.post li + li,
+.post ul ul,
+.post ol ul,
+.post ul ol,
+.post ol ol,
+.post li ul,
+.post li ol {
+  margin-top: 4px;
+}
+.post .task-list-item {
+  padding-left: 0.3rem;
+}
+.post .task-list-item > p {
+  transition: color 0.3s, opacity 0.3s;
+}
+.post .task-list-item.task-list-done > p {
+  color: #646a73;
+  text-decoration: line-through;
+}
+.post .task-list-item.task-list-done > p > .md-emoji {
+  opacity: 0.5;
+}
+.post .task-list-item.task-list-done > p > .md-link > a {
+  opacity: 0.6;
+}
+.post .task-list-item > input {
+  -webkit-appearance: initial;
+  display: block;
+  position: absolute;
+  border: 1px solid #2b2f36;
+  border-radius: 0.25rem;
+  margin-left: -1.5rem;
+  height: 1.2rem;
+  width: 1.2rem;
+  transition: border-color 0.3s;
+}
+.post .task-list-item > input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.post .task-list-item > input:hover {
+  border-color: #3370ff;
+}
+.post .task-list-item > input[checked]::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  height: 60%;
+  width: 2px;
+  transform: rotate(40deg);
+  background: #3370ff;
+}
+.post .task-list-item > input[checked]::after {
+  content: "";
+  position: absolute;
+  top: 46%;
+  left: 25%;
+  height: 30%;
+  width: 2px;
+  transform: rotate(-40deg);
+  background: #3370ff;
+}
+
+.post strong {
+  color: #245bdb;
+}

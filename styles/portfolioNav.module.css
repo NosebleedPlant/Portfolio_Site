@@ -1,0 +1,19 @@
+.navbar{
+    margin-inline: 0.5rem;
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.navbar ul{
+    margin-block: 3rem;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 3.6rem;
+    padding-block: 1.5rem;
+}
+
+.navbar li{
+    font-size: var(--fs-h6);
+    font-weight: 700;
+}
