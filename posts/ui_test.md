@@ -8,17 +8,29 @@ For this project me and my team of 4 were tasked with designing a hypothetical n
 # Persona Development:
 To better understand our target users we reviewed the work that Quilsoft does and some of the issues that students face with regards to reading and writing comprehension. Based on our review of existing work as well as our own experiences with learning English my team developed three user personae per team member for a total of 15. We then synthesized these into 4 that would represent our users and their needs. The following are the three user personae that I developed.
 
-<accordian>
+<div class="accordian">
+    <input type="checkbox" id="cb1" checked>
+    <label for="cb1" class="accordian__label">Ahmed</label>
+    <div class="accordian__content">
+      <p>Ahmed is a male highschool student. He can speak English, Farsi and French. Ahmed owns an android phone and a windows laptop both of which he is proficient with. He does not read much outside of the schoolwork assigned to him and occasional social media posts. His struggles with reading comprehension consist primarily of connecting disparate ideas that have been introduced in the text. Ahmed does not suffer from cognitive disabilities and performs decently in class usually scoring average or slightly above average marks. He is hoping to use this application to improve his reading comprehension in an effort to improve his performance at school and score higher.</p>
+    </div>
+</div>
 
-## Ahmed
-Ahmed is a male highschool student. He can speak English, Farsi and French. Ahmed owns an android phone and a windows laptop both of which he is proficient with. He does not read much outside of the schoolwork assigned to him and occasional social media posts. His struggles with reading comprehension consist primarily of connecting disparate ideas that have been introduced in the text. Ahmed does not suffer from cognitive disabilities and performs decently in class usually scoring average or slightly above average marks. He is hoping to use this application to improve his reading comprehension in an effort to improve his performance at school and score higher.
+<div class="accordian">
+    <input type="checkbox" id="cb2" unchecked>
+    <label for="cb2" class="accordian__label">James</label>
+    <div class="accordian__content">
+      <p>James is a male trade school student. He speaks English. James is comfortable with using his android phone and laptop but not when asked to do tasks outside his regular usage. He is currently working towards a diploma in metalwork. His schoolwork often requires him to read and outside of that he makes it a point to read the news on his phone in the morning. He suffers from ADHD and has a hard time concentrating on the reading material which negatively impacts his reading comprehension. James scores average marks in class and only occasionally slightly below average. James is hoping to use this application to improve his reading comprehension in an effort to improve his performance at school and score higher.</p>
+    </div>
+</div>
 
-## James
-James is a male trade school student. He speaks English. James is comfortable with using his android phone and laptop but not when asked to do tasks outside his regular usage. He is currently working towards a diploma in metalwork. His schoolwork often requires him to read and outside of that he makes it a point to read the news on his phone in the morning. He suffers from ADHD and has a hard time concentrating on the reading material which negatively impacts his reading comprehension. James scores average marks in class and only occasionally slightly below average. James is hoping to use this application to improve his reading comprehension in an effort to improve his performance at school and score higher.
-
-## Isla
-Isla is a female university student. She speaks English and moved to Canada from the UK last year. Isla is a relies on her iPhone to organize her schedule as well as complete various tasks required of her by the university. She is majoring in business and tends to read news articles in the morning when her schedule permits. Aside from that, she is often required to do extensive reading as schoolwork. Isla finds it very difficult to synthesize knowledge from what she reads without significant loss of detail and combats this by re-reading the text after some time to ensure that she is able to glean all the necessary information. She performs well in her classes and hoping to use the application to improve her reading comprehension in an effort to reduce the amount of time she currently spends studying without compromising her performance.
-</accordian>
+<div class="accordian">
+    <input type="checkbox" id="cb3" unchecked>
+    <label for="cb3" class="accordian__label">Isla</label>
+    <div class="accordian__content">
+      <p>Isla is a female university student. She speaks English and moved to Canada from the UK last year. Isla is a relies on her iPhone to organize her schedule as well as complete various tasks required of her by the university. She is majoring in business and tends to read news articles in the morning when her schedule permits. Aside from that, she is often required to do extensive reading as schoolwork. Isla finds it very difficult to synthesize knowledge from what she reads without significant loss of detail and combats this by re-reading the text after some time to ensure that she is able to glean all the necessary information. She performs well in her classes and hoping to use the application to improve her reading comprehension in an effort to reduce the amount of time she currently spends studying without compromising her performance.</p>
+    </div>
+</div>
 
 # Wireframe Prototype:
 After synthesizing our three user personae and identifying potential ways to solve their problems we developed a rough sketch of what our application would be like. I then went forward with it and developed our wire-frame prototype on Miro which can be accessed below. A full breakdown of the refined wire-frame and reasoning behind the design choices is available here. The team then collectively conducted a discount evaluation using Neilsen’s Heuristics whose results can be found here which helped refine our design.

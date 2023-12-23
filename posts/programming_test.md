@@ -21,7 +21,7 @@ Space and Bodies was a collection of art works that I made from Sep-Dec 2022. Th
 2. Shader Demo Scene
 3. Gallery Scene (Waiting on the recorded footage from the DSC to make this available, sorry.).
 
-<video style="width: 100%;">
+<video style="width: 100%;" controls>
   <source src="https://user-images.githubusercontent.com/42461443/210529297-732b5697-3539-4547-a032-cc7917f59056.mp4" type="video/mp4" />
 </video>
 
@@ -37,7 +37,7 @@ This fractal explorerer was originally made in unity BRP as part of a interactiv
 
 #### File/Folder Structure:
 
-<div class="image-container" style="width: clamp(1px,100%,30rem);">
+<div class="image-container" style="width: clamp(1px,100%,30rem);" controls>
 <img
 src="https://user-images.githubusercontent.com/42461443/210488398-5b72b231-42ec-4873-99a5-866e64296b8b.svg" 
 />
@@ -136,7 +136,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 #### Preview:
 
 <video style="width: clamp(1px,100%,30rem);">
-  <source src="https://user-images.githubusercontent.com/42461443/210475242-356a1617-8385-4263-85bb-193954fa77ae.mp4" type="video/mp4" />
+  <source src="https://user-images.githubusercontent.com/42461443/210475242-356a1617-8385-4263-85bb-193954fa77ae.mp4" type="video/mp4" / controls>
 </video>
 
 # Shader Demo Scene
@@ -158,7 +158,7 @@ src="https://user-images.githubusercontent.com/42461443/210497577-81372db4-0d39-
 
 #### Scene 00: Abberation, Downsampling and localized distortion
 
-<video style="width: clamp(1px,100%,30rem);">
+<video style="width: clamp(1px,100%,30rem);" controls>
   <source src="https://user-images.githubusercontent.com/42461443/210475250-82ee6abe-5461-4069-8cc3-c3233d866e8d.mp4" type="video/mp4" />
 </video>
 
@@ -166,7 +166,7 @@ This scene utalizes three shaders: NoiseDistort, RefractionDistort, DownscaleAbb
 
 #### Scene 01: Fake Pixel Sorting
 
-<video style="width: clamp(1px,100%,30rem);">
+<video style="width: clamp(1px,100%,30rem);" controls>
   <source src="https://user-images.githubusercontent.com/42461443/210475254-8f36ef62-1b38-440a-a306-bb8d9fec8fec.mp4" type="video/mp4" />
 </video>
 
@@ -176,7 +176,7 @@ The second camear blits the background textures before rendering opaques, and af
 
 #### Scene 02: CRT effect
 
-<video style="width: clamp(1px,100%,30rem);">
+<video style="width: clamp(1px,100%,30rem);" controls>
   <source src="https://user-images.githubusercontent.com/42461443/210475262-272fc772-e74e-4e4a-9453-35d40717032d.mp4" type="video/mp4" />
 </video>
 
@@ -184,7 +184,7 @@ The shader used in this custom post processing effect is based largely off the g
 
 #### Scene 03: Stylized Solitaire Glitch
 
-<video style="width: clamp(1px,100%,30rem);">
+<video style="width: clamp(1px,100%,30rem);" controls>
   <source src="https://user-images.githubusercontent.com/42461443/210475271-d06acbab-bbcb-4ee8-b149-c40af4deee0d.mp4" type="video/mp4" />
 </video>
 

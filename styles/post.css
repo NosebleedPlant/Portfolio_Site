@@ -3,6 +3,7 @@
     --color-canvas-subtle: #f6f8fa;
     --color-border-default: #d0d7de;
     --color-border-muted: hsla(210, 18%, 87%, 1);
+
 }
 
 table {
@@ -42,4 +43,70 @@ table img {
 img{
     width: 100%;
 }
+
+
+/* *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(auto-fit, min(100%, 30rem));
+    min-height: 100vh;
+    place-items: start;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+  } */
+  
+/* Core styles/functionality */
+/* https://codepen.io/raubaca/pen/PZzpVe */
+.accordian{
+    margin-inline: 1rem;
+}
+
+.accordian input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.accordian__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.35s;
+}
+
+.accordian input:checked ~ .accordian__content {
+    max-height: 10rem;
+}
+
+.accordian__label,
+.accordian__close {
+    display: flex;
+    cursor: pointer;
+}
+
+.accordian__label {
+    justify-content: space-between;
+    background-color: green;
+}
+
+.accordian__label::after {
+    content: "\276F";
+    text-align: center;
+    margin-right: 1rem;
+    transform: rotate(90deg);
+    transition: all 0.35s;
+}
+
+.accordian input:checked + .accordian__label::after {
+    transform: rotate(270deg);
+}
+
+.accordian__content{
+    background-color: rebeccapurple;
+}
+
+
 
