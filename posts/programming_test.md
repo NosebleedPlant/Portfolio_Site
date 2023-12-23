@@ -21,7 +21,9 @@ Space and Bodies was a collection of art works that I made from Sep-Dec 2022. Th
 2. Shader Demo Scene
 3. Gallery Scene (Waiting on the recorded footage from the DSC to make this available, sorry.).
 
-<!-- https://user-images.githubusercontent.com/42461443/210475242-356a1617-8385-4263-85bb-193954fa77ae.mp4 -->
+<video style="width: 100%;">
+  <source src="https://user-images.githubusercontent.com/42461443/210529297-732b5697-3539-4547-a032-cc7917f59056.mp4" type="video/mp4" />
+</video>
 
 
 # Stuff I did/learned
@@ -133,7 +135,9 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
 #### Preview:
 
-<!-- https://user-images.githubusercontent.com/42461443/210475242-356a1617-8385-4263-85bb-193954fa77ae.mp4 -->
+<video style="width: clamp(1px,100%,30rem);">
+  <source src="https://user-images.githubusercontent.com/42461443/210475242-356a1617-8385-4263-85bb-193954fa77ae.mp4" type="video/mp4" />
+</video>
 
 # Shader Demo Scene
 ---
@@ -154,26 +158,34 @@ src="https://user-images.githubusercontent.com/42461443/210497577-81372db4-0d39-
 
 #### Scene 00: Abberation, Downsampling and localized distortion
 
-<!-- https://user-images.githubusercontent.com/42461443/210475250-82ee6abe-5461-4069-8cc3-c3233d866e8d.mp4 -->
+<video style="width: clamp(1px,100%,30rem);">
+  <source src="https://user-images.githubusercontent.com/42461443/210475250-82ee6abe-5461-4069-8cc3-c3233d866e8d.mp4" type="video/mp4" />
+</video>
 
 This scene utalizes three shaders: NoiseDistort, RefractionDistort, DownscaleAbberation. The NoiseDistort utalizes procedural noise to generate a noisy black texture. Noise is also used to distort the vertices of the sphere along the normals to give a glitchy effect. The vertex distortion is masked using a band that oscillates from top to bottom. RefractionDistort is a very simple shader that applies a simple refraction effect to the scene texture. There are multiple methods that can be used to apply these materials but I chose to utalize the RenderObjects feature provided by unity. First the sphere is rendered using the NoiseDistort and then rendered again using the RenderObject pass with NoiseDistort set as a material override. Finally a custom post process is applied using a blit pass and the DownscaleAbberation material. The DownscaleAbberation takes the camera texture and samples it with offset UVs to create the chromatic abberation. It also posterizes the UVs to sample a lower resolution version of the texture. Lastly it combines these sampled images through masks generated from the FakeAutomata subshaders. The FakeAutomata subshader is a simple little shader that generates a mask that looks similar to cellular automata moving across the screen.
 
 #### Scene 01: Fake Pixel Sorting
 
-<!-- https://user-images.githubusercontent.com/42461443/210475254-8f36ef62-1b38-440a-a306-bb8d9fec8fec.mp4 -->
+<video style="width: clamp(1px,100%,30rem);">
+  <source src="https://user-images.githubusercontent.com/42461443/210475254-8f36ef62-1b38-440a-a306-bb8d9fec8fec.mp4" type="video/mp4" />
+</video>
 
 This scene utalizes two shaders and two renderers. The scene contains two cameras. The first camera uses a blit featuere to write distort the image using the Cam2Tex material in FauxSorting Materials folder, onto a render texture. The shader of that material takes the y-componenet of the UVs and uses that to genearte a noise texture that is streached along the y-axis. This value is then scaled based on some manipulated value of sine time (paramters are exposed to allow tuning of this sine time). The scaled noise value is then used to posterize the UVs and sample the texture. The renderer used by this camera does not blit a background texture.
 The second camear blits the background textures before rendering opaques, and after rendering them it similarly distorts the image using slightly different sine time based noise. The render texture from the first camera is also sample and combined with the second camera's opaque texture based on scene depth to create the illusion of different layers of distortion.
 
 #### Scene 02: CRT effect
 
-<!-- https://user-images.githubusercontent.com/42461443/210475262-272fc772-e74e-4e4a-9453-35d40717032d.mp4 -->
+<video style="width: clamp(1px,100%,30rem);">
+  <source src="https://user-images.githubusercontent.com/42461443/210475262-272fc772-e74e-4e4a-9453-35d40717032d.mp4" type="video/mp4" />
+</video>
 
 The shader used in this custom post processing effect is based largely off the godot shader shared by Pend00 [[7](https://godotshaders.com/shader/vhs-and-crt-monitor-effect/)]. My contribution to it was converting the code from glsl to shadergraph and creating the tearing effect. For a breakdown of the effect I would highly recommend reading through the orignal glsl's code and comments. They do an excellent job of explaining how the effect works.
 
 #### Scene 03: Stylized Solitaire Glitch
 
-<!-- https://user-images.githubusercontent.com/42461443/210475271-d06acbab-bbcb-4ee8-b149-c40af4deee0d.mp4 -->
+<video style="width: clamp(1px,100%,30rem);">
+  <source src="https://user-images.githubusercontent.com/42461443/210475271-d06acbab-bbcb-4ee8-b149-c40af4deee0d.mp4" type="video/mp4" />
+</video>
 
 The scene uses a similar approach to scene 01. Two cameras using two sepreate renderers are utalized to create a solitaire glitch isolated to asaro head bust. First camera only renders the bust onto a render texture but before doing this a custom render feature first renders the content of the render texture on to the screen creating a feedback loop. I learned of this approach from this aritcle by Alan Zucconi [[8](https://www.alanzucconi.com/2016/03/09/simulate-smoke-with-shaders/)] and this effect breakdown by Sorb [[9](https://twitter.com/SoerbGames/status/1570773880444448773?s=20&t=ifWw_myvdOQhEnu-xWt3eQ)]. The render texture containing the resutls of this feedback loop are fed to the second camera. This camera initally renders everything except the best, then renders the content of the render texture onto the screen creating the trails. Once this is done the bust is rendered ontop using the RenderObject feature. The mateiral used when rendering the the trails also fades the image a bit and applies chromatic abberation. Since this effect stacks each frame the result is fading of the trails similar to sorb's exampe. I opted to use a different appraoch for the fading, instead of simply using an alpha clip I decided to darken the image and use the darkness to decide the cipping. This results in a slightly more sylized look along with the chromatic abberation.
 
