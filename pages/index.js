@@ -22,10 +22,11 @@ export default function Home({ allPostsData }) {
       <Head>
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+      <Link href={`/blog`}>Blog</Link>
       <ul>
         {allPostsData.map(({ id, date, title }) => (
           <li key={id}>
-          <Link href={`/posts/${id}`}>{title}</Link>
+          <Link href={`/portfolio/${id}`}>{title}</Link>
           <br />
           {id}
           <br />

@@ -170,6 +170,7 @@ This scene utalizes three shaders: NoiseDistort, RefractionDistort, DownscaleAbb
   <source src="https://user-images.githubusercontent.com/42461443/210475254-8f36ef62-1b38-440a-a306-bb8d9fec8fec.mp4" type="video/mp4" />
 </video>
 
+
 This scene utalizes two shaders and two renderers. The scene contains two cameras. The first camera uses a blit featuere to write distort the image using the Cam2Tex material in FauxSorting Materials folder, onto a render texture. The shader of that material takes the y-componenet of the UVs and uses that to genearte a noise texture that is streached along the y-axis. This value is then scaled based on some manipulated value of sine time (paramters are exposed to allow tuning of this sine time). The scaled noise value is then used to posterize the UVs and sample the texture. The renderer used by this camera does not blit a background texture.
 The second camear blits the background textures before rendering opaques, and after rendering them it similarly distorts the image using slightly different sine time based noise. The render texture from the first camera is also sample and combined with the second camera's opaque texture based on scene depth to create the illusion of different layers of distortion.
 
