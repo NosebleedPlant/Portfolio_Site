@@ -1,4 +1,8 @@
 import { getAllPostIds, getPostData } from '../../lib/posts';
+import { Inter } from 'next/font/google'
+import Image from 'next/image'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps({ params }) {
   // Add the "await" keyword like this:
@@ -21,7 +25,7 @@ export async function getStaticPaths() {
 
 export default function Post({ postData }) {
   return (
-    <>
+    <main className={`${inter.className}`}>
       {postData.title}
       <br />
       {postData.id}
@@ -29,6 +33,6 @@ export default function Post({ postData }) {
       {postData.date}
       <br />
       <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-    </>
+    </main>
   );
 }
