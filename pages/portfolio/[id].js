@@ -1,5 +1,6 @@
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import { Inter } from 'next/font/google'
+import test from '@/components/test';
 
 const inter = Inter({ subsets: ['latin'] })
 
